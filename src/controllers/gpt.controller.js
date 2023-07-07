@@ -1,8 +1,9 @@
-import { Request, Response } from "express";
-import { Configuration, OpenAIApi } from "openai";
+const { Request, Response } = require("express");
+const { Configuration, OpenAIApi } = require("openai");
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
+  organization: process.env.OPENAI_ORGANIZATION,
 });
 
 const options = {
@@ -12,7 +13,7 @@ const options = {
   top_p: 1,
 };
 
-export const handleGptAnswer = async (req: Request, res: Response) => {
+exports.handleGptAnswer = async (req, res) => {
   const { query } = req.body;
 
   const openai = new OpenAIApi(configuration);
